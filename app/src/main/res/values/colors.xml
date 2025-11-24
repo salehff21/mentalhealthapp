@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_start">#7B2FF7</color>
+    <color name="purple_end">#4F7BFF</color>
+
+    <color name="bg_light">#F5F6FA</color>
+
+    <color name="text_dark">#1E1E1E</color>
+    <color name="text_gray">#8A8A8A</color>
+    <color name="text_hint">#B0B0B0</color>
+    <color name="green_card">#15C26B</color>
+    <color name="Orange_card">#FE6B2A</color>
+    <color name="blue_card">#1DA1F2</color>
+    <color name="ai_card">#A029FF</color>
+</resources>

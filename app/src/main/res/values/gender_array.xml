@@ -1,0 +1,6 @@
+<resources>
+    <string-array name="gender_list">
+        <item>ذكر</item>
+        <item>أنثى</item>
+    </string-array>
+</resources>

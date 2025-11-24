@@ -1,0 +1,107 @@
+<resources>
+
+    <!-- App General -->
+    <string name="app_name">تطبيق الصحة النفسية</string>
+
+    <!-- Login -->
+    <string name="login_title">مرحبًا بعودتك</string>
+    <string name="login_subtitle">سجّل دخولك لمتابعة رحلتك</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="login_btn">تسجيل الدخول</string>
+    <string name="forgot_password">نسيت كلمة المرور؟</string>
+    <string name="no_account">ليس لديك حساب؟</string>
+    <string name="create_account">إنشاء حساب</string>
+
+    <!-- Register -->
+    <string name="register_title">إنشاء حساب جديد</string>
+    <string name="full_name">الاسم الكامل</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="birth_year">سنة الميلاد</string>
+    <string name="gender">الجنس</string>
+    <string name="password_confirm">تأكيد كلمة المرور</string>
+    <string name="register_btn">تسجيل</string>
+    <string name="have_account">لديك حساب؟ تسجيل الدخول</string>
+
+    <!-- Gender Options -->
+    <string-array name="gender_array">
+        <item>اختر الجنس</item>
+        <item>ذكر</item>
+        <item>أنثى</item>
+    </string-array>
+
+    <!-- Home -->
+    <string name="home_welcome">مرحبًا،</string>
+    <string name="how_feel">كيف تشعر اليوم؟</string>
+    <string name="record_mood_now">سجّل مشاعرك الآن</string>
+    <string name="last_entry">آخر تسجيل</string>
+    <string name="services">الخدمات</string>
+    <string name="mood_check">استبيان نفسي</string>
+    <string name="ai_analysis">تحليل الذكاء الاصطناعي</string>
+    <string name="support">الدعم الفني</string>
+    <string name="settings">الإعدادات</string>
+
+    <!-- Mood Selection -->
+    <string name="mood_title">سجّل مشاعرك</string>
+    <string name="select_your_mood">اختر شعورك</string>
+    <string name="save_entry">حفظ التسجيل</string>
+
+    <!-- Settings -->
+    <string name="profile">الملف الشخصي</string>
+    <string name="notifications_settings">الإشعارات</string>
+    <string name="enable_notifications">تفعيل الإشعارات</string>
+    <string name="daily_reminder">تذكير يومي</string>
+    <string name="appearance">المظهر</string>
+    <string name="dark_mode">الوضع الليلي</string>
+    <string name="language">اللغة</string>
+    <string name="help_center">مركز المساعدة</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="terms">الشروط والأحكام</string>
+    <string name="logout">تسجيل الخروج</string>
+
+    <!-- AI Analysis -->
+    <string name="ai_title">تحليل الذكاء الاصطناعي</string>
+    <string name="your_mental_state">حالتك النفسية</string>
+    <string name="ai_recommendations">توصيات الذكاء الاصطناعي</string>
+    <string name="improvement_tip">نصيحة للتحسين</string>
+    <string name="statistics">إحصائيات</string>
+
+    <!-- Questionnaire -->
+    <string name="questionnaire_title">الاستبيان اليومي</string>
+    <string name="next">التالي</string>
+    <string name="previous">السابق</string>
+    <string name="submit">إرسال</string>
+    <string name="progress">التقدم</string>
+    <string name="analysis">التحليل</string>
+    <string name="home">الرئيسية</string>
+    <!-- Notifications -->
+    <string name="notifications_title">الإشعارات</string>
+    <string name="no_notifications">لا توجد إشعارات</string>
+
+    <!-- Support -->
+    <string name="support_title">الدعم الفني</string>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="send">إرسال</string>
+    <string name="sample_mood_label">إسم المستخدم </string>
+    <!-- Validation / Messages -->
+    <string name="mood_screen_title">سجل مشاعرك</string>
+
+    <string name="fill_required_fields">يرجى تعبئة جميع الحقول الأساسية</string>
+    <string name="invalid_birth_year">سنة الميلاد غير صحيحة</string>
+    <string name="choose_gender">يرجى اختيار الجنس</string>
+    <string name="passwords_not_match">كلمتا المرور غير متطابقتين</string>
+    <string name="login_success">تم تسجيل الدخول بنجاح</string>
+    <string name="register_success">تم إنشاء الحساب بنجاح</string>
+    <string name="invalid_email_or_password">البريد الإلكتروني أو كلمة المرور غير صحيحة</string>
+
+    <string name="hello_blank_fragment">واجهة تسجيل المزاج</string>
+
+    <string name="tip_today">نصيحة اليوم</string>
+    <string name="tip_today_body">خصص 10 دقائق يومياً للتأمل والتنفس العميق.</string>
+    <string name="no_entries_yet">لا يوجد تسجيل بعد</string>
+    <string name="sample_user_name">أحمد محمد</string>
+    <string name="notifications">الإشعارات</string>
+    <string name="mood">المزاج</string>
+
+
+</resources>

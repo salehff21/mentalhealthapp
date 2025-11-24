@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App General -->
+    <string name="app_name">Mental Health App</string>
+
+    <!-- Login -->
+    <string name="login_title">Welcome Back</string>
+    <string name="login_subtitle">Log in to continue your journey</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_btn">Login</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="create_account">Create Account</string>
+
+    <!-- Register -->
+    <string name="register_title">Create a New Account</string>
+    <string name="full_name">Full Name</string>
+    <string name="username">Username</string>
+    <string name="birth_year">Birth Year</string>
+    <string name="gender">Gender</string>
+    <string name="password_confirm">Confirm Password</string>
+    <string name="register_btn">Register</string>
+    <string name="have_account">Already have an account? Login</string>
+
+    <!-- Gender Options -->
+    <string-array name="gender_array">
+        <item>Select Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <!-- Home -->
+    <string name="home_welcome">Welcome,</string>
+    <string name="how_feel">How do you feel today?</string>
+    <string name="record_mood_now">Record your mood now</string>
+    <string name="last_entry">Last Entry</string>
+    <string name="services">Services</string>
+    <string name="mood_check">Mood Questionnaire</string>
+    <string name="ai_analysis">AI Analysis</string>
+    <string name="support">Support</string>
+    <string name="settings">Settings</string>
+    <string name="analysis">Analysis</string>
+    <string name="home">Home</string>
+    <!-- Mood Selection -->
+    <string name="mood_title">Record Your Mood</string>
+    <string name="select_your_mood">Select your mood</string>
+    <string name="save_entry">Save Entry</string>
+
+    <!-- Settings -->
+    <string name="profile">Profile</string>
+    <string name="notifications_settings">Notifications</string>
+    <string name="enable_notifications">Enable Notifications</string>
+    <string name="daily_reminder">Daily Reminder</string>
+    <string name="appearance">Appearance</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="language">Language</string>
+    <string name="help_center">Help Center</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms">Terms &amp; Conditions</string>
+    <string name="logout">Logout</string>
+    <string name="sample_mood_label">User Name</string>
+    <!-- AI Analysis -->
+    <string name="ai_title">AI Analysis</string>
+    <string name="your_mental_state">Your Mental State</string>
+    <string name="mood_screen_title">Log Your Mood</string>
+    <string name="hello_blank_fragment">Mood screen</string>
+
+    <string name="ai_recommendations">AI Recommendations</string>
+    <string name="improvement_tip">Improvement Tip</string>
+    <string name="statistics">Statistics</string>
+
+    <!-- Questionnaire -->
+    <string name="questionnaire_title">Daily Questionnaire</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="submit">Submit</string>
+    <string name="progress">Progress</string>
+
+    <!-- Notifications -->
+    <string name="notifications_title">Notifications</string>
+    <string name="no_notifications">No notifications</string>
+
+    <!-- Support -->
+    <string name="support_title">Support</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="send">Send</string>
+
+    <!-- Validation / Messages -->
+    <string name="fill_required_fields">Please fill all required fields</string>
+    <string name="invalid_birth_year">Invalid birth year</string>
+    <string name="choose_gender">Please choose gender</string>
+    <string name="passwords_not_match">Passwords do not match</string>
+    <string name="login_success">Login successful</string>
+    <string name="register_success">Account created successfully</string>
+    <string name="invalid_email_or_password">Invalid email or password</string>
+
+
+
+    <string name="tip_today">Tip of the day</string>
+    <string name="tip_today_body">Spend 10 minutes daily on breathing and mindfulness.</string>
+    <string name="no_entries_yet">No entries yet</string>
+    <string name="sample_user_name">Ahmed Mohammed</string>
+    <string name="notifications">Notifications</string>
+    <string name="mood">Mood</string>
+
+</resources>
