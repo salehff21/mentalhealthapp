@@ -1,133 +1,179 @@
-﻿```markdown
-# MentalHealthApp 🧠📱  
+# 🧠📱 MentalHealthApp  
 *A Mobile Application for Monitoring Mental Health Using Artificial Intelligence*
 
-## Overview
-MentalHealthApp is a mobile application designed to help users **monitor their mental health** on a daily basis using **AI-based analysis** of self-reported questionnaire data.  
-The app focuses on common psychological aspects such as **mood, stress, sleep quality, and energy level**, and provides users with **instant feedback, trends, and general recommendations**.  
+---
 
-> Important: This application is intended for **self-awareness and wellbeing support only**.  
-> It is **not** a medical diagnostic or treatment tool.
+## 📌 Overview
+**MentalHealthApp** is a mobile application designed to help users monitor their mental health daily using **AI-based analysis** of questionnaire responses.  
+The app focuses on key psychological indicators such as **mood, stress, sleep quality, and energy level**, and provides users with **instant feedback, trends, and general recommendations**.
+
+> ⚠️ *Note:* This application is intended for **self-awareness and wellbeing support only**.  
+> It is **not a medical diagnostic or treatment tool**.
 
 ---
 
-## Main Features
-- 🔐 **User Registration & Login**  
-  Secure account creation and authentication for each user.
+## ⭐ Main Features
 
-- 📋 **Daily Mood Questionnaire**  
-  Simple daily self-assessment covering mood, stress, sleep, and energy.
+### 🔐 User Authentication
+- Secure registration and login  
+- Password hashing and user activity tracking  
 
-- 🤖 **AI-Based Mood Analysis**  
-  Uses **Naive Bayes** and **Decision Tree** algorithms to classify the user’s mental state (e.g., calm, stressed, anxious) and estimate risk level.
+### 📋 Daily Mood Questionnaire
+- Simple daily assessment  
+- Covers mood, stress, sleep, and energy  
+- Dynamic questions powered by database tables  
 
-- 📊 **Mood Trends & History**  
-  Visual charts to track mental state over time (weekly / monthly), plus a history of past entries.
+### 🤖 AI-Based Mood Analysis
+- Uses **Naive Bayes** and **Decision Tree** algorithms  
+- Classifies mental state (Calm, Stressed, Anxious, etc.)  
+- Provides risk level + confidence score  
+- Generates general recommendations  
 
-- 💬 **Personalized Recommendations**  
-  General lifestyle suggestions and self-help tips based on the AI analysis.
+### 📊 Mood Trends & History
+- Weekly and monthly charts  
+- Full history of past entries  
+- Detailed breakdown per day  
 
-- 🔔 **Notifications & Reminders**  
-  Optional reminders to complete the daily mood check and view new analyses.
+### 💬 Personalized Recommendations
+- Lifestyle suggestions  
+- Self-help practices  
+- AI-generated feedback  
 
-- 🛡️ **Profile & Privacy Settings**  
-  Control over language, notifications, and data-sharing preferences.
+### 🔔 Notifications & Reminders
+- Optional reminders for daily check-ins  
+- Alerts for new analysis and recommendations  
 
----
-
-## System Architecture (High-Level)
-The system is designed in a modular way, with clear separation between:
-
-- **Mobile App (Client)**  
-  - Displays questionnaires  
-  - Collects responses  
-  - Shows AI results, charts, and notifications  
-
-- **Backend API**  
-  - Manages users, questionnaires, mood entries, and analysis results  
-  - Exposes endpoints for authentication, data storage, and retrieval  
-
-- **AI Module**  
-  - Receives questionnaire responses  
-  - Applies Naive Bayes and Decision Tree models  
-  - Returns mood classification, risk level, and recommendation text  
-
-- **Database (MySQL)**  
-  - Stores users, questionnaires, questions, options  
-  - Stores mood entries, detailed answers, AI analysis results  
-  - Stores privacy settings and notifications  
+### 🛡️ Profile & Privacy
+- Change language, notifications, and personal details  
+- Control data-sharing preferences  
 
 ---
 
-## AI Models
-The application uses two classification algorithms:
+## 🏗️ System Architecture (High-Level)
 
-1. **Naive Bayes**  
-   - Probabilistic classifier based on Bayes’ Theorem  
-   - Suitable for categorical/scaled questionnaire data  
-   - Fast, simple, and efficient for daily mood classification  
+### 📱 Mobile App (Client)
+- Displays questionnaire  
+- Sends responses  
+- Receives AI analysis  
+- Shows trends, history, and notifications  
 
-2. **Decision Tree**  
-   - Rule-based model that generates a tree of decisions  
-   - Helps interpret why a certain mental state was predicted  
-   - Useful for explainable AI and pattern understanding  
+### 🌐 Backend API
+- Authentication (Login / Register)  
+- Stores responses and analysis  
+- Fetches questionnaire structure  
+- Manages notifications and privacy settings  
 
-The combination of both models supports:
-- **efficient classification** (Naive Bayes)  
-- **interpretability and explanation** (Decision Tree)
+### 🤖 AI Module
+- Receives questionnaire data  
+- Applies Naive Bayes & Decision Tree  
+- Returns:  
+  - Mood class  
+  - Risk level  
+  - Confidence  
+  - Recommendation text  
 
----
-
-## Database Design (Simplified)
-Core tables in the database:
-
-- `users` – stores user accounts and basic profile data  
-- `questionnaires`, `questions`, `options` – define the dynamic questionnaire structure  
-- `mood_entries` – stores each submitted daily entry  
-- `entry_answers` – stores detailed answers per question  
-- `ai_analysis` – stores AI-generated mood classifications and recommendations  
-- `privacy_settings` – stores user preferences for privacy and notifications  
-- `notifications` – stores reminders and system messages sent to the user  
-
----
-
-## Possible Tech Stack (Example)
-> This section can be adapted to the actual implementation.
-
-- **Mobile App:** Flutter / Android (Kotlin or Java)  
-- **Backend API:** Node.js (Express), Laravel, or Django REST  
-- **AI Service:** Python (FastAPI / Flask) with scikit-learn models  
-- **Database:** MySQL / MariaDB  
+### 🗄️ MySQL Database
+Stores:
+- Users  
+- Questionnaires, Questions, Options  
+- Mood Entries, Entry Answers  
+- AI Analysis Results  
+- Privacy Settings  
+- Notifications  
 
 ---
 
-## Core User Flow
-1. User creates an account and logs in.  
-2. User opens **Daily Mood Check** and answers the questionnaire.  
-3. The app sends the responses to the backend, which:
-   - saves them in the database  
-   - forwards them to the AI module  
-4. The AI module analyzes the responses and returns:
-   - mood class  
-   - risk level  
-   - recommendation text  
-5. The user can:
-   - view today’s AI result  
-   - browse trends and history  
-   - adjust settings and privacy options  
+## 🧠 AI Models Used
+
+### 1) Naive Bayes
+- Probabilistic classifier  
+- Fast and efficient for questionnaire-type data  
+- Works well with categorical or scaled inputs  
+
+### 2) Decision Tree
+- Rule-based, interpretable model  
+- Shows the reasoning behind classification  
+- Supports explainable AI  
+
+**Together, they provide:**
+- ⚡ Fast and efficient classification (Naive Bayes)  
+- 📘 Clear explanation and reasoning (Decision Tree)
 
 ---
 
-## Project Status
-- ✅ System analysis and design completed (Use Case, State, Activity, Sequence, ERD, Class diagrams).  
-- ✅ Database schema defined and documented.  
-- 🚧 Implementation of mobile app, API, and AI integration in progress.  
+## 🗃️ Database Design (Simplified)
+
+### Core Tables
+- **users** – authentication & profile  
+- **questionnaires** – defines questionnaire templates  
+- **questions** – stores each question  
+- **options** – multiple-choice options  
+- **mood_entries** – daily form submissions  
+- **entry_answers** – detailed answers per question  
+- **ai_analysis** – classification, risk, recommendation  
+- **privacy_settings** – language, notifications, permissions  
+- **notifications** – messages/reminders  
+
+> Full ERD documented in system design phase.
 
 ---
 
-## Disclaimer
-This application is built as an **academic graduation project** and is intended **for educational and self-awareness purposes only**.  
-It must **not** be used as a substitute for professional psychological or medical evaluation, diagnosis, or treatment.
+## 🛠️ Suggested Tech Stack
+
+### Mobile:
+- Android Kotlin / Java  
+
+### Backend:
+- Node.js (Express)  
+- or Django REST / Laravel API  
+
+### AI:
+- Python (FastAPI)  
+- scikit-learn models (Naive Bayes, Decision Tree)
+
+### Database:
+- MySQL / MariaDB  
 
 ---
-```
+
+## 🔄 Core User Flow
+
+1. User registers or logs in.  
+2. Opens **Daily Mood Check**.  
+3. Answers questionnaire and submits.  
+4. Backend saves data → Sends to AI module.  
+5. AI analyzes responses and returns:  
+   - 🧠 mood class  
+   - ⚠️ risk level  
+   - 📊 confidence score  
+   - 💬 recommendation  
+6. User can view:  
+   - Today’s analysis  
+   - Trends & charts  
+   - Full history  
+   - Notifications  
+   - Profile & privacy settings  
+
+---
+
+## 📌 Project Status
+
+- ✅ System analysis & UML design completed  
+- ✅ Full database schema created  
+- 🚧 Mobile app development in progress  
+- 🚧 AI integration in progress  
+
+---
+
+## ⚠️ Disclaimer
+This application is part of an **academic graduation project**.  
+It is intended **for educational and self-awareness purposes only**.  
+It must **not** replace professional psychological diagnosis, treatment, or therapy.
+
+---
+
+## 👤 Developers / Contributors
+*(Add your names here)*
+
+---
+
