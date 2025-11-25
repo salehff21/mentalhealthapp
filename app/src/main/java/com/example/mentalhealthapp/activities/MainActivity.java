@@ -24,28 +24,35 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNav = findViewById(R.id.bottomNav);
 
-        // عرض HomeFragment افتراضياً عند فتح التطبيق
+        // عرض HomeFragment افتراضياً
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
             bottomNav.setSelectedItemId(R.id.nav_home);
         }
 
         bottomNav.setOnItemSelectedListener(item -> {
-            Fragment fragment;
-
+            Fragment fragment = null;
             int id = item.getItemId();
+
             if (id == R.id.nav_home) {
                 fragment = new HomeFragment();
+
             } else if (id == R.id.nav_analysis) {
                 fragment = new AnalysisFragment();
+
             } else if (id == R.id.nav_mood) {
                 fragment = new MoodFragment();
-            } else {
+
+            } else if (id == R.id.nav_settings) {
                 fragment = new SettingsFragment();
             }
 
-            loadFragment(fragment);
-            return true;
+            if (fragment != null) {
+                loadFragment(fragment);
+                return true;
+            }
+
+            return false;
         });
     }
 

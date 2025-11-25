@@ -1,6 +1,7 @@
 package com.example.mentalhealthapp.database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -153,6 +154,21 @@ import android.database.sqlite.SQLiteOpenHelper;
                             "FOREIGN KEY(user_id) REFERENCES users(user_id)" +
                             ");"
             );
+        }
+        public boolean checkUser(String email, String password) {
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cursor = db.rawQuery(
+                    "SELECT * FROM users WHERE email=? AND password_hash=?",
+                    new String[]{email, password}
+            );
+
+            boolean exists = cursor.getCount() > 0;
+
+            cursor.close();
+            db.close();
+
+            return exists;
         }
 
         @Override

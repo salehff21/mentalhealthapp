@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mentalhealthapp.R;
+import com.example.mentalhealthapp.database.DatabaseHelper;
 
 import java.util.Locale;
 
@@ -36,9 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         tvCreateAccount = findViewById(R.id.tvCreateAccount);
         tvForgot = findViewById(R.id.tvForgot);
 
-        // زر تغيير اللغة (أنت تضيفه في XML مثل TextView صغير تحت التسجيل)
-      //  tvChangeLang = findViewById(R.id.tvChangeLang);
-
 
 
         btnLogin.setOnClickListener(v -> {
@@ -49,8 +47,15 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, getString(R.string.fill_required_fields), Toast.LENGTH_SHORT).show();
                 return;
             }
+            DatabaseHelper db = new DatabaseHelper(this);
+
+            if (!db.checkUser(email, pass)) {
+                Toast.makeText(this, getString(R.string.invalid_email_or_password), Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             // TODO: لاحقاً ربط API للتحقق من الحساب
+
 
             Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, MainActivity.class));
@@ -62,13 +67,15 @@ public class LoginActivity extends AppCompatActivity {
 
         tvForgot.setOnClickListener(v ->
                 Toast.makeText(this, getString(R.string.forgot_password), Toast.LENGTH_SHORT).show());
+
+
     }
 
-    // =======================================================================
-    //                       دعم اللغة — Language Support
-    // =======================================================================
 
-    // تغيير اللغة وحفظها
+    //                       دعم اللغة — Language Support
+
+
+
     private void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);

@@ -1,5 +1,6 @@
 <resources>
     <string-array name="gender_list">
+        <item>اختر الجنس</item>
         <item>ذكر</item>
         <item>أنثى</item>
     </string-array>

@@ -5,15 +5,15 @@
     android:id="@+id/mainRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="locale"
-    android:textDirection="locale"
-    android:background="@color/bg_light">
+    android:background="@color/bg_light"
+    android:fitsSystemWindows="true">
 
     <!-- Fragment Container -->
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fitsSystemWindows="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,8 +23,12 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dp"
+        android:paddingBottom="12dp"
         android:background="@android:color/white"
+        android:elevation="8dp"
+        android:fitsSystemWindows="true"
         app:itemIconTint="@drawable/bottom_nav_selector"
         app:itemTextColor="@drawable/bottom_nav_selector"
         app:labelVisibilityMode="labeled"

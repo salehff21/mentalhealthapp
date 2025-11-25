@@ -13,6 +13,7 @@ import com.example.mentalhealthapp.R;
 
 public class AnalysisFragment extends Fragment {
 
+    public AnalysisFragment(){}
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
