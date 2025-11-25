@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Use filled icon when checked -->
+    <item android:state_checked="true"
+        android:drawable="@drawable/ic_radio_checked"/>
+
+    <!-- Use outline icon when not checked -->
+    <item android:drawable="@drawable/ic_radio_unchecked"/>
+
+</selector>

@@ -1,0 +1,12 @@
+<!-- Custom RadioButton layout used for questionnaire answer options -->
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/bg_option"
+    android:gravity="center_vertical"
+    android:padding="14dp"
+    android:textSize="16sp"
+    android:button="@null"
+    android:drawableStart="@drawable/ic_radio_unchecked"
+    android:drawablePadding="10dp"
+    android:text="Option" />

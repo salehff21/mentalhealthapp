@@ -1,0 +1,24 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- الخلفية (الرمادية) -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="10dp"/>
+            <solid android:color="#E0E0E0"/>
+        </shape>
+    </item>
+
+    <!-- الشريط المتقدم (اللون الرئيسي) -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="10dp"/>
+                <gradient
+                    android:startColor="#6A5AE0"
+                    android:endColor="#9A7FF0"
+                    android:angle="0"/>
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

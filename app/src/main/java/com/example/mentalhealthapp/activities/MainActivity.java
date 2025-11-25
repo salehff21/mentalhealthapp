@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNav = findViewById(R.id.bottomNav);
 
-        // عرض HomeFragment افتراضياً
+        //   HomeFragment
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
             bottomNav.setSelectedItemId(R.id.nav_home);

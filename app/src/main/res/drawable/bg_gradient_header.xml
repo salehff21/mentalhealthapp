@@ -1,0 +1,11 @@
+<!-- Gradient background for the top section of the questionnaire screen -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Vertical gradient colors -->
+    <gradient
+        android:startColor="#6A5AE0"
+        android:endColor="#8B7CFF"
+        android:angle="0" />
+
+</shape>
