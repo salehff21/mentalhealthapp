@@ -212,7 +212,7 @@ public class MoodFragment extends Fragment {
                     rb2.setChecked(true);
                     break;
                 case 2:
-                    rb3.setChecked(true);
+                    rb3.setChecked(true); 
                     break;
                 case 3:
                     rb4.setChecked(true);
