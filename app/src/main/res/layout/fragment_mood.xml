@@ -3,9 +3,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F5FF">
+    android:background="#F8F5FF"
+    android:layoutDirection="rtl">
 
     <!-- Top gradient header -->
     <LinearLayout
@@ -37,7 +39,6 @@
                 android:textSize="20sp"
                 android:gravity="center"/>
 
-            <!-- Arrow icon (you can replace with your own vector) -->
             <ImageView
                 android:id="@+id/imgNextArrow"
                 android:layout_width="24dp"
@@ -45,7 +46,6 @@
                 android:src="@drawable/ic_arrow_forward"
                 app:tint="@android:color/white"/>
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/txtQuestionCounter"
@@ -114,25 +114,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Option 1 -->
         <RadioButton
             android:id="@+id/rbOption1"
             style="@style/QuestionOptionStyle"
             android:text="راضٍ جدًا"/>
 
-        <!-- Option 2 -->
         <RadioButton
             android:id="@+id/rbOption2"
             style="@style/QuestionOptionStyle"
             android:text="راضٍ"/>
 
-        <!-- Option 3 -->
         <RadioButton
             android:id="@+id/rbOption3"
             style="@style/QuestionOptionStyle"
             android:text="محايد"/>
 
-        <!-- Option 4 -->
         <RadioButton
             android:id="@+id/rbOption4"
             style="@style/QuestionOptionStyle"
@@ -155,18 +151,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Previous question button at the bottom -->
-    <Button
-        android:id="@+id/btnPrev"
-        android:text="السؤال السابق"
+    <!-- Bottom navigation buttons (Previous / Next) -->
+    <LinearLayout
+        android:id="@+id/bottomButtons"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_margin="16dp"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:background="@drawable/bg_button_purple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnPrev"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="السؤال السابق"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_button_purple"/>
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="السؤال التالي"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_button_purple"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

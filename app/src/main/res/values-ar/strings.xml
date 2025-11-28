@@ -11,6 +11,7 @@
     <string name="password">كلمة المرور</string>
     <string name="login_btn">تسجيل الدخول</string>
     <string name="forgot_password">نسيت كلمة المرور؟</string>
+    <string name="home_how_feel">كيف تشعر ؟</string>
     <string name="no_account">ليس لديك حساب؟</string>
     <string name="create_account">إنشاء حساب</string>
 
@@ -23,7 +24,7 @@
     <string name="password_confirm">تأكيد كلمة المرور</string>
     <string name="register_btn">تسجيل</string>
     <string name="have_account">لديك حساب؟ تسجيل الدخول</string>
-
+    <string name="back"> رجوع</string>
     <!-- Gender Options -->
     <string-array name="gender_array">
         <item>اختر الجنس</item>

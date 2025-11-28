@@ -21,10 +21,11 @@ public class HomeFragment extends Fragment {
 
     private DatabaseHelper dbHelper;
     private BottomNavigationView bottomNav;
+
     private TextView tvUserName, tvWelcome, tvHowFeel;
     private TextView tvLastMoodEmoji, tvLastMoodLabel, tvLastMoodDate;
 
-    // مؤقتاً: المستخدم الحالي (لاحقاً تربطه بالـSession بعد Login)
+    // Temporary current user id (later should be taken from login session / SharedPreferences)
     private int currentUserId = 1;
 
     @Nullable
@@ -37,7 +38,7 @@ public class HomeFragment extends Fragment {
 
         dbHelper = new DatabaseHelper(requireContext());
 
-        // ربط العناصر
+        // Bind UI elements
         tvUserName = v.findViewById(R.id.tvUserName);
         tvWelcome  = v.findViewById(R.id.tvWelcome);
         tvHowFeel  = v.findViewById(R.id.tvHowFeel);
@@ -46,40 +47,59 @@ public class HomeFragment extends Fragment {
         tvLastMoodLabel = v.findViewById(R.id.tvLastMoodLabel);
         tvLastMoodDate  = v.findViewById(R.id.tvLastMoodDate);
 
-        // تحميل بيانات المستخدم وآخر تسجيل
+        // Load user information and last mood entry
         loadUserInfo();
         loadLastEntry();
 
-        // BottomNavigation من MainActivity
-        BottomNavigationView bottomNav =
-                requireActivity().findViewById(R.id.bottomNav);
+        // Get BottomNavigationView from MainActivity
+        bottomNav = requireActivity().findViewById(R.id.bottomNav);
 
-        // كرت سجل مشاعرك الآن -> روح لتبويب المزاج
+        // "Record Mood Now" card -> open MoodLogFragment
+
         v.findViewById(R.id.cardRecordMood).setOnClickListener(view -> {
-            if (bottomNav != null) bottomNav.setSelectedItemId(R.id.nav_mood);
+            // Create the mood log fragment (replace with your actual class name if different)
+            Fragment moodLogFragment = new fragment_mood_log();
+
+            // Optionally change selected bottom tab to "mood"
+            if (bottomNav != null) {
+                bottomNav.setSelectedItemId(R.id.nav_mood);
+            }
+
+            // Replace the current fragment with MoodLogFragment in the main container
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, moodLogFragment) // use the same container as other fragments
+                    .addToBackStack(null) // allow back navigation
+                    .commit();
         });
 
-        // كرت الاستبيان النفسي -> روح لتبويب المزاج (لأن الاستبيان هناك)
+
+        // Questionnaire card -> switch to Mood tab
+
         v.findViewById(R.id.cardQuestionnaire).setOnClickListener(view -> {
             if (bottomNav != null) bottomNav.setSelectedItemId(R.id.nav_mood);
         });
+        // AI analysis card -> switch to Analysis tab
 
-        // كرت تحليل الذكاء الاصطناعي -> تبويب التحليل
         v.findViewById(R.id.cardAI).setOnClickListener(view -> {
             if (bottomNav != null) bottomNav.setSelectedItemId(R.id.nav_analysis);
         });
 
-        // كرت الإعدادات -> تبويب الإعدادات
+
+        // Settings card -> switch to Settings tab
+
         v.findViewById(R.id.cardSettings).setOnClickListener(view -> {
             if (bottomNav != null) bottomNav.setSelectedItemId(R.id.nav_settings);
         });
 
-        // كرت الدعم الفني -> حالياً نفس تبويب الإعدادات أو اتركه لاحقاً
+        // Support card -> currently also goes to Settings tab
+
         v.findViewById(R.id.cardSupport).setOnClickListener(view -> {
             if (bottomNav != null) bottomNav.setSelectedItemId(R.id.nav_settings);
         });
 
-        // أيقونات أعلى الهيدر (اختياري)
+        // Header icons (bell + avatar) -> open Settings for now
+
         v.findViewById(R.id.ivBell).setOnClickListener(view -> {
             if (bottomNav != null) bottomNav.setSelectedItemId(R.id.nav_settings);
         });
@@ -91,6 +111,9 @@ public class HomeFragment extends Fragment {
         return v;
     }
 
+    /**
+     * Load basic user info (full name) and show welcome text.
+     */
     private void loadUserInfo() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery(
@@ -102,11 +125,15 @@ public class HomeFragment extends Fragment {
             String name = c.getString(0);
             tvUserName.setText(name);
             tvWelcome.setText(getString(R.string.home_welcome) + "، " + name);
+            tvHowFeel.setText(getString(R.string.home_how_feel));
         }
 
         c.close();
     }
 
+    /**
+     * Load the last mood entry for the current user (if any).
+     */
     private void loadLastEntry() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery(
@@ -122,8 +149,8 @@ public class HomeFragment extends Fragment {
             tvLastMoodLabel.setText(mood);
             tvLastMoodDate.setText(date);
             tvLastMoodEmoji.setText(getEmojiForMood(mood));
-
         } else {
+            // No entries yet
             tvLastMoodLabel.setText(getString(R.string.no_entries_yet));
             tvLastMoodDate.setText("");
             tvLastMoodEmoji.setText("🙂");
@@ -132,6 +159,9 @@ public class HomeFragment extends Fragment {
         c.close();
     }
 
+    /**
+     * Map mood text to an emoji icon.
+     */
     private String getEmojiForMood(String mood) {
         if (mood == null) return "🙂";
         String m = mood.toLowerCase();

@@ -1,5 +1,6 @@
 package com.example.mentalhealthapp.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -170,7 +171,25 @@ import android.database.sqlite.SQLiteOpenHelper;
 
             return exists;
         }
+        /**
+         * Insert a new mood entry into the database
+         */
+        public boolean insertMood(int userId, String mood, Integer stress,
+                                  Integer sleep, Integer energy, String notes) {
 
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues cv = new ContentValues();
+
+            cv.put("user_id", userId);
+            cv.put("mood_level", mood);
+            cv.put("stress_score", stress);
+            cv.put("sleep_quality", sleep);
+            cv.put("energy_level", energy);
+            cv.put("notes", notes);
+
+            long result = db.insert("mood_entries", null, cv);
+            return result != -1;
+        }
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             db.execSQL("DROP TABLE IF EXISTS notifications");

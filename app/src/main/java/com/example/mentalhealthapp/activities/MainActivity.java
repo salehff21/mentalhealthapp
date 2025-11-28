@@ -1,6 +1,7 @@
 package com.example.mentalhealthapp.activities;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -10,9 +11,11 @@ import com.example.mentalhealthapp.R;
 import com.example.mentalhealthapp.fragments.AnalysisFragment;
 import com.example.mentalhealthapp.fragments.HomeFragment;
 import com.example.mentalhealthapp.fragments.MoodFragment;
+import com.example.mentalhealthapp.fragments.ProfileFragment;
 import com.example.mentalhealthapp.fragments.SettingsFragment;
+import com.example.mentalhealthapp.fragments.fragment_mood_log;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import androidx.appcompat.app.AppCompatDelegate;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNav;
@@ -24,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNav = findViewById(R.id.bottomNav);
 
-        //   HomeFragment
+        // الوضع الفاتح فقط
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        // تحميل الصفحة الرئيسية لأول مرة
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
             bottomNav.setSelectedItemId(R.id.nav_home);
@@ -45,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
             } else if (id == R.id.nav_settings) {
                 fragment = new SettingsFragment();
+
+            } else if (id == R.id.nav_profile) {
+                fragment = new ProfileFragment();
             }
 
             if (fragment != null) {
@@ -57,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadFragment(Fragment fragment) {
+
+        // إخفاء أو إظهار البار حسب نوع الشاشة
+        if (fragment instanceof fragment_mood_log ) {
+            // ضع اسم شاشة تسجيل المشاعر هنا
+            bottomNav.setVisibility(View.GONE);
+        } else {
+            bottomNav.setVisibility(View.VISIBLE);
+        }
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)

@@ -23,7 +23,7 @@
     <string name="password_confirm">Confirm Password</string>
     <string name="register_btn">Register</string>
     <string name="have_account">Already have an account? Login</string>
-
+    <string name="back"> Back</string>
     <!-- Gender Options -->
     <string-array name="gender_array">
         <item>Select Gender</item>
@@ -95,7 +95,7 @@
     <string name="login_success">Login successful</string>
     <string name="register_success">Account created successfully</string>
     <string name="invalid_email_or_password">Invalid email or password</string>
-
+    <string name="home_how_feel"> How to feel?</string>
 
 
     <string name="tip_today">Tip of the day</string>

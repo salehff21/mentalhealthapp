@@ -28,6 +28,7 @@ public class MoodFragment extends Fragment {
     private ProgressBar progressBar;
     private Button btnPrev;
     private ImageView imgNextArrow;
+    private Button btnNext;
 
     // Data
     private List<Question> questions = new ArrayList<>();
@@ -52,7 +53,7 @@ public class MoodFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         btnPrev = view.findViewById(R.id.btnPrev);
         imgNextArrow = view.findViewById(R.id.imgNextArrow);
-
+        btnNext=view.findViewById(R.id.btnNext);
         // 2) Build questions list
         setupQuestions();
 
@@ -71,6 +72,44 @@ public class MoodFragment extends Fragment {
                 Toast.makeText(getContext(), "This is the first question", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
+
+        // 5) Next arrow (in header)
+        btnNext.setOnClickListener(v -> {
+
+            // User must select an option before proceeding
+            if (!saveAnswer()) {
+                Toast.makeText(getContext(), "Please select an answer", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // If we still have more questions → move to the next one
+            if (currentIndex < questions.size() - 1) {
+
+                // Move to next question
+                currentIndex++;
+                showQuestion();
+
+            } else {
+                // If this is the last question → navigate to AnalysisFragment
+
+                // Create the AnalysisFragment instance
+                AnalysisFragment analysisFragment = new AnalysisFragment();
+
+                // Replace the current fragment with AnalysisFragment
+                getParentFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, analysisFragment) // Make sure this ID matches your Activity layout
+                        .addToBackStack(null) // Allow user to go back if needed
+                        .commit();
+            }
+        });
+
+
+
+
 
         // 5) Next arrow (in header)
         imgNextArrow.setOnClickListener(v -> {

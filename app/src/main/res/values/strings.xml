@@ -22,7 +22,7 @@
     <string name="password_confirm">تأكيد كلمة المرور</string>
     <string name="register_btn">تسجيل</string>
     <string name="have_account">لديك حساب؟ تسجيل الدخول</string>
-
+    <string name="back"> رجوع</string>
     <!-- Gender Options -->
     <string-array name="gender_array">
         <item>اختر الجنس</item>
@@ -85,7 +85,7 @@
     <string name="sample_mood_label">إسم المستخدم </string>
     <!-- Validation / Messages -->
     <string name="mood_screen_title">سجل مشاعرك</string>
-
+    <string name="home_how_feel">كيف تشعر ؟</string>
     <string name="fill_required_fields">يرجى تعبئة جميع الحقول الأساسية</string>
     <string name="invalid_birth_year">سنة الميلاد غير صحيحة</string>
     <string name="choose_gender">يرجى اختيار الجنس</string>
