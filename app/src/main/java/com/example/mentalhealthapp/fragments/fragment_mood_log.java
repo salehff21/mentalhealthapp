@@ -98,6 +98,7 @@ public class fragment_mood_log extends Fragment {
             // Temporary user ID until login system is implemented
             int userId = 1;
 
+
             // For now, we pass null because this screen does not collect stress/sleep/energy
             Integer stressScore = null;
             Integer sleepQuality = null;

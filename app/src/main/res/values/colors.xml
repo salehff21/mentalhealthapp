@@ -12,4 +12,9 @@
     <color name="Orange_card">#FE6B2A</color>
     <color name="blue_card">#1DA1F2</color>
     <color name="ai_card">#A029FF</color>
+    <color name="status_excellent">#16A34A</color>
+    <color name="status_good">#22C55E</color>
+    <color name="status_neutral">#EAB308</color>
+    <color name="status_low">#EF4444</color>
+
 </resources>

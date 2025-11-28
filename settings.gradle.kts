@@ -8,14 +8,19 @@ pluginManagement {
             }
         }
         mavenCentral()
+        // JitPack for plugins if needed
+        maven("https://jitpack.io")
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+        // JitPack for libraries (MPAndroidChart is here)
+        maven("https://jitpack.io")
     }
 }
 

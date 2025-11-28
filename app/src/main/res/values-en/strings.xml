@@ -96,13 +96,28 @@
     <string name="register_success">Account created successfully</string>
     <string name="invalid_email_or_password">Invalid email or password</string>
     <string name="home_how_feel"> How to feel?</string>
-
-
     <string name="tip_today">Tip of the day</string>
     <string name="tip_today_body">Spend 10 minutes daily on breathing and mindfulness.</string>
     <string name="no_entries_yet">No entries yet</string>
     <string name="sample_user_name">Ahmed Mohammed</string>
     <string name="notifications">Notifications</string>
     <string name="mood">Mood</string>
+
+        <string name="language_label">Language</string>
+        <string name="language_default">English</string>
+
+        <string name="app_name_display">Raha App</string>
+        <string name="app_version_display">Version 1.0.0</string>
+
+    <string name="phone">Phone</string>
+    <string name="role">Role</string>
+    <string name="save">Save</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="change_password">Change password</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+    <string name="save_password">Save password</string>
+
+
 
 </resources>

@@ -98,14 +98,33 @@
     <string name="login_success">تم تسجيل الدخول بنجاح</string>
     <string name="register_success">تم إنشاء الحساب بنجاح</string>
     <string name="invalid_email_or_password">البريد الإلكتروني أو كلمة المرور غير صحيحة</string>
-
-
     <string name="tip_today">نصيحة اليوم</string>
     <string name="tip_today_body">خصص 10 دقائق يومياً للتأمل والتنفس العميق.</string>
     <string name="no_entries_yet">لا يوجد تسجيل بعد</string>
     <string name="sample_user_name">أحمد محمد</string>
     <string name="notifications">الإشعارات</string>
     <string name="mood">المزاج</string>
+
+
+
+
+        <string name="language_label">اللغة</string>
+        <string name="language_default">العربية</string>
+
+
+
+        <string name="app_name_display">تطبيق راحة</string>
+        <string name="app_version_display">الإصدار 1.0.0</string>
+
+    <string name="phone">رقم الجوال</string>
+    <string name="role">الدور / الصفة</string>
+    <string name="save">حفظ</string>
+    <string name="edit_profile">تعديل  </string>
+    <string name="change_password">تغيير كلمة المرور</string>
+    <string name="current_password">كلمة المرور الحالية</string>
+    <string name="new_password">كلمة المرور الجديدة</string>
+    <string name="save_password">حفظ كلمة المرور</string>
+
 
 
 </resources>
