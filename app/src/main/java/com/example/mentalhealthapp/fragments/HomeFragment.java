@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import com.example.mentalhealthapp.fragments.Technecal_support_fragment;
 import com.example.mentalhealthapp.R;
 import com.example.mentalhealthapp.database.DatabaseHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,6 +27,7 @@ public class HomeFragment extends Fragment {
 
     // Temporary current user id (later should be taken from login session / SharedPreferences)
     private int currentUserId = 1;
+    private Fragment technecal_support_fragment  =new Technecal_support_fragment();
 
     @Nullable
     @Override
@@ -64,7 +65,6 @@ public class HomeFragment extends Fragment {
             if (bottomNav != null) {
                 bottomNav.setSelectedItemId(R.id.nav_mood);
             }
-
             // Replace the current fragment with MoodLogFragment in the main container
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
@@ -73,6 +73,22 @@ public class HomeFragment extends Fragment {
                     .commit();
         });
 
+
+        //View Technecal support
+        v.findViewById(R.id.cardSupport).setOnClickListener(view -> {
+            // Create the mood log fragment (replace with your actual class name if different)
+
+            // Optionally change selected bottom tab to "mood"
+            if (bottomNav != null) {
+                bottomNav.setSelectedItemId(R.id.nav_mood);
+            }
+            // Replace the current fragment with MoodLogFragment in the main container
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, technecal_support_fragment) // use the same container as other fragments
+                    .addToBackStack(null) // allow back navigation
+                    .commit();
+        });
 
         // Questionnaire card -> switch to Mood tab
 
@@ -93,10 +109,21 @@ public class HomeFragment extends Fragment {
         });
 
         // Support card -> currently also goes to Settings tab
-
         v.findViewById(R.id.cardSupport).setOnClickListener(view -> {
-            if (bottomNav != null) bottomNav.setSelectedItemId(R.id.nav_settings);
+            // Create the mood log fragment (replace with your actual class name if different)
+
+            // Optionally change selected bottom tab to "mood"
+            if (bottomNav != null) {
+                bottomNav.setSelectedItemId(R.id.nav_mood);
+            }
+            // Replace the current fragment with MoodLogFragment in the main container
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, technecal_support_fragment) // use the same container as other fragments
+                    .addToBackStack(null) // allow back navigation
+                    .commit();
         });
+
 
         // Header icons (bell + avatar) -> open Settings for now
 

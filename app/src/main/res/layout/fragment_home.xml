@@ -10,9 +10,6 @@
     android:textDirection="locale"
     android:fitsSystemWindows="true">
 
-    <!-- Scrollable content:
-         - Now fills the whole screen because BottomNavigationView is removed from this fragment
-         - fillViewport keeps content aligned nicely on tall screens -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/homeScroll"
         android:layout_width="0dp"
@@ -68,7 +65,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <!-- User name -->
+            <!-- User name (placeholder from strings) -->
             <TextView
                 android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
@@ -81,7 +78,7 @@
                 app:layout_constraintTop_toTopOf="@id/ivAvatar"
                 app:layout_constraintEnd_toStartOf="@id/ivAvatar"/>
 
-            <!-- Welcome text -->
+            <!-- Welcome -->
             <TextView
                 android:id="@+id/tvWelcome"
                 android:layout_width="0dp"
@@ -97,7 +94,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <!-- "How do you feel today?" -->
+            <!-- How do you feel -->
             <TextView
                 android:id="@+id/tvHowFeel"
                 android:layout_width="0dp"
@@ -110,12 +107,11 @@
                 app:layout_constraintStart_toStartOf="@id/tvWelcome"
                 app:layout_constraintEnd_toEndOf="@id/tvWelcome"/>
 
-            <!-- Call-to-action card -->
+            <!-- Record mood CTA -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardRecordMood"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 app:cardCornerRadius="14dp"
                 app:cardElevation="6dp"
                 android:layout_marginTop="130dp"
@@ -131,7 +127,6 @@
                     android:gravity="center_vertical"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-
                     android:layoutDirection="locale">
 
                     <TextView
@@ -210,11 +205,12 @@
                             android:textSize="14sp"
                             android:textColor="@color/text_dark"/>
 
+                        <!-- default text from strings, will be overwritten by code -->
                         <TextView
                             android:id="@+id/tvLastMoodDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2025-11-08"
+                            android:text="@string/no_entries_yet"
                             android:textSize="12sp"
                             android:textColor="@color/text_gray"/>
                     </LinearLayout>
