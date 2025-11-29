@@ -21,7 +21,6 @@ public class HomeFragment extends Fragment {
 
     private DatabaseHelper dbHelper;
     private BottomNavigationView bottomNav;
-
     private TextView tvUserName, tvWelcome, tvHowFeel;
     private TextView tvLastMoodEmoji, tvLastMoodLabel, tvLastMoodDate;
 

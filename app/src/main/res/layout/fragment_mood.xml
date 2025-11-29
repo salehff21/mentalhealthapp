@@ -33,7 +33,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="استبيان نفسي"
+                android:text="@string/questionnaire_title"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -51,7 +51,7 @@
             android:id="@+id/txtQuestionCounter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="السؤال 1 من 6"
+            android:text="@string/question_counter_initial"
             android:textColor="@android:color/white"
             android:layout_marginTop="12dp"
             android:textSize="13sp"/>
@@ -73,7 +73,7 @@
         android:id="@+id/txtQuestion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="هل تشعر بالرضا عن حياتك الاجتماعية؟"
+        android:text="@string/question_sample_text"
         android:textSize="18sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -90,7 +90,7 @@
         android:id="@+id/txtSubTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="اختر الإجابة الأقرب لحالتك"
+        android:text="@string/question_subtitle"
         android:textSize="13sp"
         android:textColor="#777777"
         android:gravity="center"
@@ -117,22 +117,22 @@
         <RadioButton
             android:id="@+id/rbOption1"
             style="@style/QuestionOptionStyle"
-            android:text="راضٍ جدًا"/>
+            android:text="@string/option_very_satisfied"/>
 
         <RadioButton
             android:id="@+id/rbOption2"
             style="@style/QuestionOptionStyle"
-            android:text="راضٍ"/>
+            android:text="@string/option_satisfied"/>
 
         <RadioButton
             android:id="@+id/rbOption3"
             style="@style/QuestionOptionStyle"
-            android:text="محايد"/>
+            android:text="@string/option_neutral"/>
 
         <RadioButton
             android:id="@+id/rbOption4"
             style="@style/QuestionOptionStyle"
-            android:text="غير راضٍ"/>
+            android:text="@string/option_not_satisfied"/>
     </RadioGroup>
 
     <!-- Hint under options -->
@@ -140,7 +140,7 @@
         android:id="@+id/txtHint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="اضغط على الخيار للمتابعة"
+        android:text="@string/question_hint"
         android:textColor="#999999"
         android:textSize="12sp"
         android:gravity="center"
@@ -169,7 +169,7 @@
             android:layout_height="48dp"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:text="السؤال السابق"
+            android:text="@string/button_prev_question"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:background="@drawable/bg_button_purple"/>
@@ -180,7 +180,7 @@
             android:layout_height="48dp"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:text="السؤال التالي"
+            android:text="@string/button_next_question"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:background="@drawable/bg_button_purple"/>

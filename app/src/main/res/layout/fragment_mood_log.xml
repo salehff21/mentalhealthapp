@@ -23,11 +23,17 @@
 
         <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="53dp"
+            android:layout_height="53dp"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/back"
+
+            android:padding="8dp"
+            android:scaleType="centerInside"
             android:src="@drawable/ic_arrow_back"
-        android:contentDescription="@string/back" />
+
+            app:tint="@android:color/white" />
+
 
         <LinearLayout
             android:layout_width="0dp"

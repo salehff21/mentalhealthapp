@@ -121,4 +121,54 @@
     <string name="save_password">حفظ كلمة المرور</string>
 
 
+
+        <!-- النص الابتدائي فقط؛ يمكن لاحقاً استخدام فورمات ديناميكي -->
+        <string name="question_counter_initial">السؤال 1 من 6</string>
+        <!-- أو لو حبيت صيغة ديناميكية من الكود: السؤال %1$d من %2$d -->
+        <string name="question_counter_pattern">السؤال %1$d من %2$d</string>
+
+        <string name="question_sample_text">هل تشعر بالرضا عن حياتك الاجتماعية؟</string>
+        <string name="question_subtitle">اختر الإجابة الأقرب لحالتك</string>
+
+        <string name="option_very_satisfied">راضٍ جدًا</string>
+        <string name="option_satisfied">راضٍ</string>
+        <string name="option_neutral">محايد</string>
+        <string name="option_not_satisfied">غير راضٍ</string>
+
+        <string name="question_hint">اضغط على الخيار للمتابعة</string>
+
+        <string name="button_prev_question">السؤال السابق</string>
+        <string name="button_next_question">السؤال التالي</string>
+
+
+
+        <!-- شاشة تحليل الذكاء الاصطناعي -->
+        <string name="analysis_title">تحليل الذكاء الاصطناعي</string>
+        <string name="analysis_subtitle">تحليل شامل لحالتك النفسية</string>
+
+        <string name="status_label">حالتك النفسية</string>
+        <string name="status_value_default">ممتاز</string>
+        <string name="status_note_default">بناءً على تحليلات آخر يومين</string>
+
+        <string name="mood_chart_title">رسم بياني للمزاج</string>
+        <string name="mood_chart_subtitle">اتجاه المزاج (آخر الأيام)</string>
+
+        <string name="ai_recs_title">توصيات الذكاء الاصطناعي</string>
+
+        <string name="pattern_title_default">نمط إيجابي ملحوظ</string>
+        <string name="pattern_body_default">
+        لاحظنا تحسنًا في مزاجك خلال الأيام الأخيرة. استمر في ممارساتك الإيجابية الحالية.
+    </string>
+
+        <string name="suggestion_title_default">نصيحة للتحسين</string>
+        <string name="suggestion_body_default">
+        حاول تخصيص وقت للاسترخاء أو المشي في الطبيعة، فهذه الأنشطة تساعد على تحسين الحالة المزاجية.
+    </string>
+
+        <string name="stats_title">إحصائيات</string>
+        <string name="stats_total_entries_label">عدد التسجيلات</string>
+        <string name="stats_total_entries_default">0</string>
+        <string name="stats_avg_mood_label">متوسط المزاج</string>
+        <string name="stats_avg_mood_default">0.0 / 5</string>
+
 </resources>

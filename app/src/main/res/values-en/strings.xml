@@ -119,5 +119,56 @@
     <string name="save_password">Save password</string>
 
 
+        <!-- Questionnaire screen -->
+
+        <!-- Initial static text (optional if you use the pattern from code) -->
+        <string name="question_counter_initial">Question 1 of 6</string>
+        <!-- Dynamic pattern: Question %1$d of %2$d -->
+        <string name="question_counter_pattern">Question %1$d of %2$d</string>
+
+        <string name="question_sample_text">Do you feel satisfied with your social life?</string>
+        <string name="question_subtitle">Choose the answer that best matches how you feel</string>
+
+        <string name="option_very_satisfied">Very satisfied</string>
+        <string name="option_satisfied">Satisfied</string>
+        <string name="option_neutral">Neutral</string>
+        <string name="option_not_satisfied">Not satisfied</string>
+
+        <string name="question_hint">Tap an option to continue</string>
+
+        <string name="button_prev_question">Previous question</string>
+        <string name="button_next_question">Next question</string>
+
+
+        <!-- AI analysis screen -->
+        <string name="analysis_title">AI Analysis</string>
+        <string name="analysis_subtitle">Comprehensive analysis of your mental state</string>
+
+        <string name="status_label">Your mental state</string>
+        <string name="status_value_default">Excellent</string>
+        <string name="status_note_default">Based on the last 2 days</string>
+
+        <string name="mood_chart_title">Mood chart</string>
+        <string name="mood_chart_subtitle">Mood trend (last days)</string>
+
+        <string name="ai_recs_title">AI recommendations</string>
+
+        <string name="pattern_title_default">Notable positive pattern</string>
+        <string name="pattern_body_default">
+        We noticed an improvement in your mood over the recent days. Keep up your current positive habits.
+    </string>
+
+        <string name="suggestion_title_default">Suggestion for improvement</string>
+        <string name="suggestion_body_default">
+        Try to set aside time for relaxation or a walk in nature; these activities can help improve your mood.
+    </string>
+
+        <string name="stats_title">Statistics</string>
+        <string name="stats_total_entries_label">Total entries</string>
+        <string name="stats_total_entries_default">0</string>
+        <string name="stats_avg_mood_label">Average mood</string>
+        <string name="stats_avg_mood_default">0.0 / 5</string>
+
+
 
 </resources>

@@ -9,27 +9,28 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.example.mentalhealthapp.database.DatabaseHelper;
+
 import com.example.mentalhealthapp.R;
+import com.example.mentalhealthapp.database.DatabaseHelper;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.google.android.material.card.MaterialCardView;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class AnalysisFragment extends Fragment {
 
@@ -45,17 +46,17 @@ public class AnalysisFragment extends Fragment {
     // Chart
     private LineChart lineChartMood;
 
+    // Status "card" container (in XML it's a LinearLayout)
+    private View cardStatus;
+
     // Database helper
     private DatabaseHelper dbHelper;
 
     public AnalysisFragment() {}
 
-    private MaterialCardView cardStatus;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Initialize the local SQLite helper
         dbHelper = new DatabaseHelper(requireContext());
     }
 
@@ -63,9 +64,6 @@ public class AnalysisFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-
-
-
         return inflater.inflate(R.layout.fragment_analysis, container, false);
     }
 
@@ -73,8 +71,6 @@ public class AnalysisFragment extends Fragment {
     public void onViewCreated(@NonNull View view,
                               @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
 
         // Bind UI components
         txtStatusEmoji = view.findViewById(R.id.txtStatusEmoji);
@@ -89,12 +85,15 @@ public class AnalysisFragment extends Fragment {
 
         lineChartMood = view.findViewById(R.id.lineChartMood);
 
+        // في XML العنصر cardMoodStatus هو LinearLayout
+        cardStatus = view.findViewById(R.id.cardMoodStatus);
+
         // Load and display analysis
         loadAnalysis();
     }
 
     /**
-     * Main entry point to load mood statistics, last status, chart and AI recommendations.
+     * Load mood statistics, last status, 6-days chart and AI recommendations.
      */
     private void loadAnalysis() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -102,46 +101,110 @@ public class AnalysisFragment extends Fragment {
         Cursor cursor = db.rawQuery(
                 "SELECT mood_level, stress_score, recorded_at " +
                         "FROM mood_entries " +
-                        "ORDER BY recorded_at ASC " +
-                        "LIMIT 7",
+                        "ORDER BY recorded_at ASC",
                 null
         );
 
-        List<String> moodLabels   = new ArrayList<>();
-        List<Integer> moodScores  = new ArrayList<>();
+        // All moods (for last mood label, AI, etc.)
+        List<String> moodLabels = new ArrayList<>();
         List<Integer> stressScores = new ArrayList<>();
-        List<String> dateLabels   = new ArrayList<>();   // NEW
+
+        // For chart: average per day for the last 6 days
+        Map<String, List<Integer>> moodByDayLabel = new LinkedHashMap<>();
+
+        Date now = new Date();
+        long sixDaysMillis = 5L * 24 * 60 * 60 * 1000;   // اليوم + آخر 5 أيام
+        long cutoffTime = now.getTime() - sixDaysMillis;
+
+        SimpleDateFormat labelFormat = new SimpleDateFormat("d MMM", new Locale("ar"));
 
         if (cursor.moveToFirst()) {
             do {
-                String moodLevel   = cursor.getString(0);
-                int stressScore    = cursor.isNull(1) ? -1 : cursor.getInt(1);
-                String recordedAt  = cursor.getString(2); // NEW
+                String moodLevel  = cursor.getString(0);
+                int stressScore   = cursor.isNull(1) ? -1 : cursor.getInt(1);
+                String recordedAt = cursor.getString(2);
 
+                // Keep full label list for last mood & AI
                 moodLabels.add(moodLevel);
-                moodScores.add(mapMoodToScore(moodLevel));
                 stressScores.add(stressScore);
 
-                dateLabels.add(formatDateLabel(recordedAt)); // NEW
+                // Parse date
+                Date dateObj = parseRecordedAtToDate(recordedAt);
+                if (dateObj == null) {
+                    continue;
+                }
+
+                // Only keep entries within the last 6 days
+                if (dateObj.getTime() >= cutoffTime) {
+                    String dayLabel = labelFormat.format(dateObj); // ex: "4 نوفمبر"
+
+                    int moodScore = mapMoodToScore(moodLevel);
+
+                    List<Integer> dayList = moodByDayLabel.get(dayLabel);
+                    if (dayList == null) {
+                        dayList = new ArrayList<>();
+                        moodByDayLabel.put(dayLabel, dayList);
+                    }
+                    dayList.add(moodScore);
+                }
 
             } while (cursor.moveToNext());
         }
         cursor.close();
 
+        // Build chart lists: one point per day (average mood)
+        List<Integer> moodScoresForChart = new ArrayList<>();
+        List<String> dateLabelsForChart  = new ArrayList<>();
+
+        for (Map.Entry<String, List<Integer>> entry : moodByDayLabel.entrySet()) {
+            String dayLabel = entry.getKey();
+            List<Integer> scores = entry.getValue();
+
+            int sum = 0;
+            for (int s : scores) {
+                sum += s;
+            }
+            int avg = Math.round(sum * 1f / scores.size());
+
+            moodScoresForChart.add(avg);
+            dateLabelsForChart.add(dayLabel);
+        }
+
+        // Stats over all entries
         int totalEntries = getTotalEntries(db);
         double avgMoodScoreAll = getAverageMoodScore(db);
 
-       // Average of the last 3 days (or fewer if not available
-        double recentAvgMood = calcRecentAverage(moodScores, 3);   // NEW
+        // Average of last 3 days from the 6-days chart
+        double recentAvgMood = calcRecentAverage(moodScoresForChart, 3);
 
         updateStatsUI(totalEntries, avgMoodScoreAll);
-        updateLastMoodStatus(moodLabels, recentAvgMood);           // تعديل التوقيع
-        updateLineChart(moodScores, dateLabels);                   // تمرير التواريخ
+        updateLastMoodStatus(moodLabels, recentAvgMood);
+        updateLineChart(moodScoresForChart, dateLabelsForChart);
         updateAiRecommendations(avgMoodScoreAll, stressScores);
     }
 
+    /**
+     * Parse recorded_at (either millis string or "yyyy-MM-dd HH:mm:ss") to Date.
+     */
+    private Date parseRecordedAtToDate(String recordedAt) {
+        if (recordedAt == null) return null;
+
+        try {
+            if (recordedAt.matches("\\d+")) {
+                long millis = Long.parseLong(recordedAt);
+                return new Date(millis);
+            } else {
+                SimpleDateFormat src =
+                        new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                return src.parse(recordedAt);
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     private double calcRecentAverage(List<Integer> scores, int lastN) {
-        if (scores == null || scores.isEmpty()) return 0;
+        if (scores == null || scores.isEmpty()) return -1; // -1 = no recent data
 
         int n = Math.min(lastN, scores.size());
         int sum = 0;
@@ -151,36 +214,8 @@ public class AnalysisFragment extends Fragment {
         return (double) sum / n;
     }
 
-    private String formatDateLabel(String recordedAt) {
-        if (recordedAt == null) return "";
-
-        try {
-            Date date;
-
-
-            if (recordedAt.matches("\\d+")) {
-                long millis = Long.parseLong(recordedAt);
-                date = new Date(millis);
-            } else {
-                // Modify the date format according to the storage in your table
-                SimpleDateFormat src =
-                        new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                date = src.parse(recordedAt);
-            }
-
-            SimpleDateFormat dest =
-                    new SimpleDateFormat("d MMM", new Locale("ar")); // مثال: 4 نوفمبر
-            return dest.format(date);
-
-        } catch (Exception e) {
-
-            return recordedAt;
-        }
-    }
-
     /**
      * Maps Arabic mood label to a numerical score from 1 to 5.
-     * You can adjust these mappings according to your questionnaire scale.
      */
     private int mapMoodToScore(String mood) {
         if (mood == null) return 3;
@@ -212,7 +247,7 @@ public class AnalysisFragment extends Fragment {
     }
 
     /**
-     * Computes an approximate average mood score based on mood_level mapping.
+     * Computes average mood score over all entries.
      */
     private double getAverageMoodScore(SQLiteDatabase db) {
         Cursor c = db.rawQuery(
@@ -243,30 +278,26 @@ public class AnalysisFragment extends Fragment {
         if (totalEntries == 0) {
             txtAvgMood.setText("N/A");
         } else {
-            txtAvgMood.setText(String.format("%.1f / 5", avgMoodScore));
+            txtAvgMood.setText(String.format(Locale.getDefault(), "%.1f / 5", avgMoodScore));
         }
     }
 
     /**
-     * Updates main AI status card using the most recent mood label.
+     * Updates main AI status card using the average of the last 3 days.
      */
     private void updateLastMoodStatus(List<String> moodLabels, double recentAvgMood) {
 
-        if (moodLabels.isEmpty()) {
+        if (moodLabels.isEmpty() || recentAvgMood < 0) {
             txtStatusEmoji.setText("😶");
             txtStatusValue.setText("لا توجد بيانات");
             txtStatusNote.setText("ابدأ بتسجيل حالتك المزاجية لعرض تحليل لحالتك النفسية.");
             if (cardStatus != null) {
-                cardStatus.setCardBackgroundColor(
+                cardStatus.setBackgroundColor(
                         ContextCompat.getColor(requireContext(), R.color.status_neutral));
             }
             return;
         }
 
-        //Last recorded mood status (for your information only, if you wish to display it elsewhere
-        String latestMood = moodLabels.get(moodLabels.size() - 1);
-
-        // Psychological status evaluation based on the average of the last 3 days
         String statusText;
         String statusEmoji;
         int colorResId;
@@ -289,20 +320,18 @@ public class AnalysisFragment extends Fragment {
             colorResId  = R.color.status_low;
         }
 
-        // Your psychological state is excellent
         txtStatusEmoji.setText(statusEmoji);
         txtStatusValue.setText(statusText);
         txtStatusNote.setText("بناءً على تحليل آخر ٣ أيام من تسجيلاتك المزاجية.");
 
         if (cardStatus != null) {
-            cardStatus.setCardBackgroundColor(
+            cardStatus.setBackgroundColor(
                     ContextCompat.getColor(requireContext(), colorResId));
         }
     }
 
-
     /**
-     * Configures and updates the line chart with mood scores over time.
+     * Configures and updates the line chart with mood scores over time (last 6 days).
      */
     private void updateLineChart(List<Integer> moodScores, List<String> dateLabels) {
 
@@ -323,7 +352,7 @@ public class AnalysisFragment extends Fragment {
         dataSet.setCircleRadius(4f);
         dataSet.setDrawValues(false);
 
-        // شكل منحني قريب من التصميم الذي في الصورة
+        // Smooth curve similar to design
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         dataSet.setDrawFilled(true);
         dataSet.setFillAlpha(60);
@@ -338,12 +367,12 @@ public class AnalysisFragment extends Fragment {
         XAxis xAxis = lineChartMood.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1f);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(dateLabels)); // الأيام على المحور X
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(dateLabels));
         xAxis.setLabelCount(dateLabels.size(), true);
-        xAxis.setLabelRotationAngle(-30f); // ميلان بسيط للقراءة
+        xAxis.setLabelRotationAngle(-30f);
 
         lineChartMood.getAxisRight().setEnabled(false);
-        lineChartMood.getAxisLeft().setAxisMinimum(1f); // من 1 إلى 5
+        lineChartMood.getAxisLeft().setAxisMinimum(1f);
         lineChartMood.getAxisLeft().setAxisMaximum(5f);
 
         lineChartMood.invalidate();
@@ -351,13 +380,10 @@ public class AnalysisFragment extends Fragment {
 
     /**
      * Produces simple AI-like recommendations based on average mood and stress scores.
-     * This is a heuristic approximation that can later be replaced by real
-     * Naive Bayes / Decision Tree model predictions.
      */
     private void updateAiRecommendations(double avgMoodScore, List<Integer> stressScores) {
 
         if (stressScores.isEmpty()) {
-            // No stress data yet – fallback to mood-based rule
             if (avgMoodScore == 0) {
                 txtPatternBody.setText("لا توجد بيانات كافية بعد. حاول تسجيل حالتك المزاجية لعدة أيام.");
                 txtSuggestionBody.setText("ابدأ باستخدام الاستبيان اليومي لمساعدة الذكاء الاصطناعي على فهم حالتك الذهنية.");
@@ -365,7 +391,6 @@ public class AnalysisFragment extends Fragment {
             }
         }
 
-        // Compute average stress (ignoring -1 as “not provided”)
         int sum = 0;
         int count = 0;
         int highStressDays = 0;
@@ -381,10 +406,7 @@ public class AnalysisFragment extends Fragment {
             avgStress = (double) sum / count;
         }
 
-        // Simple decision-tree-like logic:
-
         if (avgStress >= 4 || highStressDays >= 3) {
-            // High stress pattern
             txtPatternBody.setText(
                     "اكتشف الذكاء الاصطناعي نمطاً من التوتر والقلق المرتفع في استجاباتك الأخيرة."
             );
@@ -393,7 +415,6 @@ public class AnalysisFragment extends Fragment {
                             "فكر في التحدث إلى شخص تثق به أو مختص."
             );
         } else if (avgMoodScore <= 2.5) {
-            // Low mood pattern
             txtPatternBody.setText(
                     "كان متوسط حالتك المزاجية منخفضاً نسبياً في الآونة الأخيرة."
             );
@@ -402,7 +423,6 @@ public class AnalysisFragment extends Fragment {
                             "إذا استمر الحزن أو انخفاض الطاقة، قد يكون من المفيد استشارة مختص في الصحة النفسية."
             );
         } else if (avgMoodScore >= 4.0) {
-            // Positive pattern
             txtPatternBody.setText(
                     "يُظهر نمط حالتك المزاجية الأخير حالات إيجابية ومستقرة في الغالب."
             );
@@ -411,7 +431,6 @@ public class AnalysisFragment extends Fragment {
                             "هذه العادات تدعم رفاهيتك."
             );
         } else {
-            // Neutral / mixed pattern
             txtPatternBody.setText(
                     "نمط حالتك المزاجية الأخير مختلط، ويحتوي على أيام إيجابية وأخرى مليئة بالتحديات."
             );

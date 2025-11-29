@@ -87,7 +87,6 @@ public class MoodFragment extends Fragment {
 
         return view;
     }
-
     /**
      * Handles moving to the next question or saving the questionnaire at the end.
      */

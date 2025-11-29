@@ -1,6 +1,8 @@
 package com.example.mentalhealthapp.fragments;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -322,6 +324,10 @@ public class SettingsFragment extends Fragment {
      * Applies a new locale and recreates the hosting Activity.
      */
     private void applyLanguage(String langCode) {
+        // 1) Persist the selected language so it survives app restarts
+        saveLanguage(langCode);
+
+        // 2) Update the current Resources locale so strings are reloaded
         Locale locale = new Locale(langCode);
         Locale.setDefault(locale);
 
@@ -330,7 +336,19 @@ public class SettingsFragment extends Fragment {
         config.setLocale(locale);
         res.updateConfiguration(config, res.getDisplayMetrics());
 
-        // Recreate Activity so all views reload with the new locale
+        // 3) Recreate the Activity so all views are inflated with the new locale
         requireActivity().recreate();
     }
+
+    private void saveLanguage(String langCode) {
+        // Save the language code (e.g., "en", "ar") in SharedPreferences
+        SharedPreferences prefs =
+                requireContext().getSharedPreferences("app_settings", Context.MODE_PRIVATE);
+
+        // Apply the change asynchronously
+        prefs.edit()
+                .putString("app_lang", langCode)
+                .apply();
+    }
+
 }

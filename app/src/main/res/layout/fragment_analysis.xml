@@ -32,7 +32,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="تحليل الذكاء الاصطناعي"
+                android:text="@string/analysis_title"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -51,7 +51,7 @@
             android:id="@+id/txtAnalysisSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="تحليل شامل لحالتك النفسية"
+            android:text="@string/analysis_subtitle"
             android:textColor="@android:color/white"
             android:textSize="13sp"
             android:layout_marginTop="8dp"/>
@@ -95,7 +95,7 @@
                     android:id="@+id/txtStatusLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="حالتك النفسية"
+                    android:text="@string/status_label"
                     android:textColor="@android:color/white"
                     android:textSize="16sp"
                     android:layout_marginTop="4dp"/>
@@ -104,7 +104,7 @@
                     android:id="@+id/txtStatusValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ممتاز"
+                    android:text="@string/status_value_default"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
                     android:textSize="20sp"
@@ -114,7 +114,7 @@
                     android:id="@+id/txtStatusNote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="بناءً على تحليلات آخر ٢ يوم"
+                    android:text="@string/status_note_default"
                     android:textColor="@android:color/white"
                     android:textSize="12sp"
                     android:layout_marginTop="4dp"/>
@@ -125,13 +125,12 @@
                 android:id="@+id/txtMoodChartTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="رسم بياني للمزاج"
+                android:text="@string/mood_chart_title"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="#333333"
                 android:layout_marginTop="20dp"/>
 
-            <!-- Simple chart card (placeholder – can be replaced by real chart later) -->
             <!-- Simple chart card (line chart using MPAndroidChart) -->
             <LinearLayout
                 android:id="@+id/cardMoodChart"
@@ -145,11 +144,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mood trend (last days)"
+                    android:text="@string/mood_chart_subtitle"
                     android:textSize="13sp"
                     android:textColor="#777777"/>
 
-                <!-- LineChart instead of placeholder view -->
+                <!-- LineChart -->
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChartMood"
                     android:layout_width="match_parent"
@@ -164,7 +163,7 @@
                 android:id="@+id/txtAiRecsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="توصيات الذكاء الاصطناعي"
+                android:text="@string/ai_recs_title"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="#333333"
@@ -184,7 +183,7 @@
                     android:id="@+id/txtPatternTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="نمط إيجابي ملحوظ"
+                    android:text="@string/pattern_title_default"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="#1B5E20"/>
@@ -193,7 +192,7 @@
                     android:id="@+id/txtPatternBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="لاحظنا تحسنًا في مزاجك خلال الأيام الأخيرة. استمر في ممارساتك الإيجابية الحالية."
+                    android:text="@string/pattern_body_default"
                     android:textSize="13sp"
                     android:textColor="#555555"
                     android:layout_marginTop="4dp"/>
@@ -213,7 +212,7 @@
                     android:id="@+id/txtSuggestionTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="نصيحة للتحسين"
+                    android:text="@string/suggestion_title_default"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="#6A1B9A"/>
@@ -222,7 +221,7 @@
                     android:id="@+id/txtSuggestionBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="حاول تخصيص وقت للاسترخاء أو المشي في الطبيعة، هذه الأنشطة تساعد على تحسين الحالة المزاجية."
+                    android:text="@string/suggestion_body_default"
                     android:textSize="13sp"
                     android:textColor="#555555"
                     android:layout_marginTop="4dp"/>
@@ -233,7 +232,7 @@
                 android:id="@+id/txtStatsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="إحصائيات"
+                android:text="@string/stats_title"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="#333333"
@@ -262,7 +261,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="عدد التسجيلات"
+                        android:text="@string/stats_total_entries_label"
                         android:textSize="12sp"
                         android:textColor="#777777"/>
 
@@ -270,7 +269,7 @@
                         android:id="@+id/txtTotalEntries"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2"
+                        android:text="@string/stats_total_entries_default"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="#333333"/>
@@ -291,7 +290,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="متوسط المزاج"
+                        android:text="@string/stats_avg_mood_label"
                         android:textSize="12sp"
                         android:textColor="#777777"/>
 
@@ -299,7 +298,7 @@
                         android:id="@+id/txtAvgMood"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4.5 / 5"
+                        android:text="@string/stats_avg_mood_default"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="#333333"/>

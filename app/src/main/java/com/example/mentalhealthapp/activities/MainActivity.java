@@ -1,11 +1,14 @@
 package com.example.mentalhealthapp.activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.mentalhealthapp.LocaleUtil;
 import com.example.mentalhealthapp.R;
 
 import com.example.mentalhealthapp.fragments.AnalysisFragment;
@@ -19,6 +22,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNav;
+    private Context newBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +31,16 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNav = findViewById(R.id.bottomNav);
 
-        // الوضع الفاتح فقط
+        // Force light mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        // تحميل الصفحة الرئيسية لأول مرة
+        // Load home fragment on first launch
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
             bottomNav.setSelectedItemId(R.id.nav_home);
         }
 
+        // Bottom navigation item selection
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment fragment = null;
             int id = item.getItemId();
@@ -65,6 +70,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        // Read the saved language code; default to Arabic ("ar") if none is saved
+        SharedPreferences prefs =
+                newBase.getSharedPreferences("app_settings", Context.MODE_PRIVATE);
+        String langCode = prefs.getString("app_lang", "ar");
+
+        // Wrap the base context with a locale-updated context
+        Context localizedContext = LocaleUtil.updateLocale(newBase, langCode);
+
+        // Attach the localized context to this Activity
+        super.attachBaseContext(localizedContext);
+    }
     private void loadFragment(Fragment fragment) {
 
         // إخفاء أو إظهار البار حسب نوع الشاشة
