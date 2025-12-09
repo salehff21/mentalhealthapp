@@ -123,12 +123,8 @@ Stores:
 ### Mobile:
 - Android Kotlin / Java  
 
-### Backend:
-- Node.js (Express)  
-- or Django REST / Laravel API  
 
 ### AI:
-- Python (FastAPI)  
 - scikit-learn models (Naive Bayes, Decision Tree)
 
 ### Database:
@@ -176,4 +172,5 @@ It must **not** replace professional psychological diagnosis, treatment, or ther
 *(Add your names here)*
 
 ---
+
 
