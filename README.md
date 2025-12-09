@@ -1,11 +1,12 @@
-# 🧠📱 MentalHealthApp  
-*A Mobile Application for Monitoring Mental Health Using Artificial Intelligence*
+ # 🧠📱 MentalHealthApp  
+*A Mobile Application for Monitoring Mental Health Using On-Device Rule-Based Analysis*
 
 ---
 
 ## 📌 Overview
-**MentalHealthApp** is a mobile application designed to help users monitor their mental health daily using **AI-based analysis** of questionnaire responses.  
-The app focuses on key psychological indicators such as **mood, stress, sleep quality, and energy level**, and provides users with **instant feedback, trends, and general recommendations**.
+**MentalHealthApp** is a mobile application designed to help users **monitor their mental wellbeing on a daily basis** through a simple questionnaire and **on-device intelligent analysis**.  
+
+The app focuses on key psychological indicators such as **mood, stress, sleep quality, and energy level**, and provides users with **instant feedback, visual trends, and general wellbeing recommendations** – all processed locally on the device using rule-based logic.
 
 > ⚠️ *Note:* This application is intended for **self-awareness and wellbeing support only**.  
 > It is **not a medical diagnostic or treatment tool**.
@@ -15,162 +16,180 @@ The app focuses on key psychological indicators such as **mood, stress, sleep qu
 ## ⭐ Main Features
 
 ### 🔐 User Authentication
-- Secure registration and login  
-- Password hashing and user activity tracking  
+- Local user registration and login  
+- Basic credential validation  
+- User profile management (name, email, language preference, etc.)
 
 ### 📋 Daily Mood Questionnaire
-- Simple daily assessment  
-- Covers mood, stress, sleep, and energy  
-- Dynamic questions powered by database tables  
+- Short, easy-to-answer daily questionnaire  
+- Covers:
+  - Overall mood  
+  - Stress level  
+  - Sleep quality  
+  - Energy/fatigue  
+- Questions and options are stored in the local database (SQLite)
 
-### 🤖 AI-Based Mood Analysis
-- Uses **Naive Bayes** and **Decision Tree** algorithms  
-- Classifies mental state (Calm, Stressed, Anxious, etc.)  
-- Provides risk level + confidence score  
-- Generates general recommendations  
+### 🧠 On-Device Intelligent Analysis
+- No external server or cloud AI is required  
+- Uses simple **statistical calculations** (e.g., averages) and **rule-based logic** to:
+  - Analyze daily scores  
+  - Detect patterns such as:
+    - Persistently low mood  
+    - High stress over several days  
+  - Generate textual feedback based on detected patterns  
+- All analysis is performed **locally in the app**, in Java
 
 ### 📊 Mood Trends & History
-- Weekly and monthly charts  
-- Full history of past entries  
-- Detailed breakdown per day  
+- Line charts of mood trend over time (weekly/monthly view)  
+- Visualized using a charting library (e.g., MPAndroidChart)  
+- Full history of past entries stored in SQLite  
+- Ability to review older records and compare changes in mood and stress
 
-### 💬 Personalized Recommendations
-- Lifestyle suggestions  
-- Self-help practices  
-- AI-generated feedback  
+### 💬 Wellbeing Recommendations
+- General recommendations based on the user’s recent scores  
+- Simple rule-based messages for:
+  - High stress  
+  - Low mood  
+  - Relatively stable / positive patterns  
+- Focus on lifestyle tips and self-help suggestions
 
-### 🔔 Notifications & Reminders
-- Optional reminders for daily check-ins  
-- Alerts for new analysis and recommendations  
+### 🌐 Bilingual User Interface
+- Supports **Arabic and English**  
+- Language can be changed from settings  
+- Uses Android resource files (`values` / `values-ar`) for localization
 
 ### 🛡️ Profile & Privacy
-- Change language, notifications, and personal details  
-- Control data-sharing preferences  
+- Local profile settings (name, email, language, etc.)  
+- Basic privacy options stored in the database  
+- All data is stored **locally on the device** using SQLite
 
 ---
 
 ## 🏗️ System Architecture (High-Level)
 
-### 📱 Mobile App (Client)
-- Displays questionnaire  
-- Sends responses  
-- Receives AI analysis  
-- Shows trends, history, and notifications  
+The current version of **MentalHealthApp** is a fully on-device solution with two main logical layers:
 
-### 🌐 Backend API
-- Authentication (Login / Register)  
-- Stores responses and analysis  
-- Fetches questionnaire structure  
-- Manages notifications and privacy settings  
+### 📱 Presentation Layer (Mobile App)
+- Android app developed in **Java** using **Android Studio**  
+- Activities and Fragments:
+  - Authentication screens (Login / Register)  
+  - Main screen with bottom navigation  
+  - Home, Mood, Analysis, Profile, and Settings screens  
+- Responsible for:
+  - Displaying questions and collecting responses  
+  - Rendering charts and history  
+  - Displaying analysis results and recommendations  
 
-### 🤖 AI Module
-- Receives questionnaire data  
-- Applies Naive Bayes & Decision Tree  
-- Returns:  
-  - Mood class  
-  - Risk level  
-  - Confidence  
-  - Recommendation text  
+### 🗄️ Data & Analysis Layer (On-Device)
+- **SQLite** database via a custom `SQLiteOpenHelper` (`DatabaseHelper`)  
+- Stores:
+  - Users  
+  - Questionnaires and questions  
+  - Daily mood entries and detailed answers  
+  - Analysis logs and basic privacy settings  
+- Contains the **rule-based analysis engine** implemented in Java to:
+  - Compute average scores  
+  - Check threshold conditions  
+  - Generate feedback messages
 
-### 🗄️ MySQL Database
-Stores:
-- Users  
-- Questionnaires, Questions, Options  
-- Mood Entries, Entry Answers  
-- AI Analysis Results  
-- Privacy Settings  
-- Notifications  
+> There is **no separate backend API** and **no remote AI server** in the current implementation.  
+> All logic and storage are local to the Android device.
 
 ---
 
-## 🧠 AI Models Used
+## 🧠 Analysis Logic (Current Version)
 
-### 1) Naive Bayes
-- Probabilistic classifier  
-- Fast and efficient for questionnaire-type data  
-- Works well with categorical or scaled inputs  
+The current “intelligent” component is implemented as **rule-based analysis** running inside the app:
 
-### 2) Decision Tree
-- Rule-based, interpretable model  
-- Shows the reasoning behind classification  
-- Supports explainable AI  
+- Aggregates questionnaire scores (e.g., mood, stress) over a configurable period  
+- Computes average scores per metric  
+- Applies a set of rules, for example:
+  - If average stress is high → show stress-related warning and tips  
+  - If mood is consistently low → display low-mood advice and encouragement  
+  - If mood is relatively stable and positive → show a positive reinforcement message  
+- Stores analysis results and messages in the local database when needed
 
-**Together, they provide:**
-- ⚡ Fast and efficient classification (Naive Bayes)  
-- 📘 Clear explanation and reasoning (Decision Tree)
+> Future versions may replace or extend this rule-based approach with trained machine-learning models.
 
 ---
 
 ## 🗃️ Database Design (Simplified)
 
-### Core Tables
-- **users** – authentication & profile  
-- **questionnaires** – defines questionnaire templates  
-- **questions** – stores each question  
-- **options** – multiple-choice options  
-- **mood_entries** – daily form submissions  
-- **entry_answers** – detailed answers per question  
-- **ai_analysis** – classification, risk, recommendation  
-- **privacy_settings** – language, notifications, permissions  
-- **notifications** – messages/reminders  
+All data is stored locally in an **SQLite** database. Typical tables include:
 
-> Full ERD documented in system design phase.
+- **users** – authentication & basic profile data  
+- **questionnaires** – definitions of questionnaire templates  
+- **questions** – each question with its type and category  
+- **options** – choices for multiple-choice questions and their scores  
+- **mood_entries** – one record per daily submission  
+- **entry_answers** – detailed answers linked to each mood entry  
+- **ai_analysis** – (optional) stores generated analysis summaries and messages  
+- **privacy_settings** – language, basic privacy-related flags  
+
+> The exact schema may evolve, but the overall structure follows this design.
 
 ---
 
-## 🛠️ Suggested Tech Stack
+## 🛠️ Tech Stack
 
-### Mobile:
-- Android Kotlin / Java  
+### Mobile (Current Implementation)
+- **Platform:** Android  
+- **Language:** Java  
+- **UI Layouts:** XML  
+- **IDE:** Android Studio  
 
+### Data Storage
+- **SQLite** (on-device)  
+- Custom `DatabaseHelper` using `SQLiteOpenHelper`
 
-### AI:
-- scikit-learn models (Naive Bayes, Decision Tree)
-
-### Database:
-- MySQL / MariaDB  
+### Visualization
+- **MPAndroidChart** (or similar) for line charts and visualizing mood trends
 
 ---
 
 ## 🔄 Core User Flow
 
-1. User registers or logs in.  
-2. Opens **Daily Mood Check**.  
-3. Answers questionnaire and submits.  
-4. Backend saves data → Sends to AI module.  
-5. AI analyzes responses and returns:  
-   - 🧠 mood class  
-   - ⚠️ risk level  
-   - 📊 confidence score  
-   - 💬 recommendation  
-6. User can view:  
-   - Today’s analysis  
-   - Trends & charts  
-   - Full history  
-   - Notifications  
-   - Profile & privacy settings  
+1. User installs the app and opens it for the first time.  
+2. User registers a new account or logs in with an existing one.  
+3. User navigates to the **Daily Mood Check** screen.  
+4. User answers the questionnaire and submits the form.  
+5. The app:
+   - Saves the data in the local SQLite database  
+   - Runs on-device rule-based analysis  
+   - Generates feedback/recommendations  
+6. User can:
+   - View today’s analysis and message  
+   - Check charts for weekly/monthly trends  
+   - Browse older entries in the history  
+   - Edit profile information and language in settings  
 
 ---
 
 ## 📌 Project Status
 
-- ✅ System analysis & UML design completed  
-- ✅ Full database schema created  
-- 🚧 Mobile app development in progress  
-- 🚧 AI integration in progress  
+- ✅ System analysis & basic design completed  
+- ✅ Android application implemented with:
+  - Local authentication  
+  - Daily mood questionnaire  
+  - On-device rule-based analysis  
+  - Charts and history visualization  
+  - Bilingual UI (Arabic/English)  
+- 🔜 Future enhancements planned:
+  - Remote backup / sync  
+  - More advanced AI models (e.g., Naive Bayes, Decision Tree, or Deep Learning) via a secure backend  
+  - Richer notification and reminder system  
 
 ---
 
 ## ⚠️ Disclaimer
+
 This application is part of an **academic graduation project**.  
-It is intended **for educational and self-awareness purposes only**.  
-It must **not** replace professional psychological diagnosis, treatment, or therapy.
+It is intended **for educational and self-awareness purposes only** and should **not** be used as a substitute for professional psychological diagnosis, treatment, or therapy.
 
 ---
 
 ## 👤 Developers / Contributors
-*(Add your names here)*
+
+*(Add your names, IDs, and roles here)*
 
 ---
-
-
