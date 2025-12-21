@@ -190,6 +190,7 @@ It is intended **for educational and self-awareness purposes only** and should *
 
 ## 👤 Developers / Contributors
 
-*(Add your names, IDs, and roles here)*
+*(Saleh Al-Shaebi)*
 
 ---
+
