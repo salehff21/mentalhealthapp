@@ -187,10 +187,11 @@ This application is part of an **academic graduation project**.
 It is intended **for educational and self-awareness purposes only** and should **not** be used as a substitute for professional psychological diagnosis, treatment, or therapy.
 
 ---
+ ## 👤 Developer
 
-## 👤 Developers / Contributors
+- **Saleh Al-Shaebi**  
+  *Information Technology Graduate | Freelance Developer*  
 
-*(Saleh Al-Shaebi)*
-
----
+🔗 **LinkedIn:**  
+[Saleh Al-Shaebi](https://www.linkedin.com/in/saleh-al-shaebi-1903263aa)
 
